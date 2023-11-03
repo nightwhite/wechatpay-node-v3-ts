@@ -5,3 +5,4 @@ test
 yarn.lock
 test.ts
 test/*
+pnpm-lock.yaml

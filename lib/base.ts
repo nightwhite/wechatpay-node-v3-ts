@@ -43,6 +43,7 @@ export class Base {
         ...result.body,
       };
     } catch (error) {
+      console.error("postRequest Error",error);
       const err = JSON.parse(JSON.stringify(error));
       return {
         status: err.status,

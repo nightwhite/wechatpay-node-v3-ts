@@ -333,6 +333,8 @@ class Pay extends Base {
 
     const signature = this.getSignature(method, nonce_str, timestamp, url.replace('https://api.mch.weixin.qq.com', ''), params);
     const authorization = this.getAuthorization(nonce_str, timestamp, signature);
+    console.log("init params", method, url, params)
+    console.log("authorization", authorization)
     return authorization;
   }
   //#region 支付相关接口

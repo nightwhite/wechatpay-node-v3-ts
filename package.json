@@ -1,6 +1,6 @@
 {
   "name": "wechatpay-node-v3-laf",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "description": "微信支付文档v3",
   "keywords": [
     "node",
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@fidm/x509": "^1.2.1",
+    "axios": "^1.6.0",
     "superagent": "^8.0.6"
   },
   "devDependencies": {

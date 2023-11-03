@@ -1,4 +1,5 @@
 import request from 'superagent';
+import axios, { AxiosResponse } from 'axios';
 import { Output } from './interface-v2';
 
 export class Base {
@@ -28,28 +29,28 @@ export class Base {
    */
   protected async postRequest(url: string, params: Record<string, any>, authorization: string): Promise<Record<string, any>> {
     try {
-      const result = await request
-        .post(url)
-        .send(params)
-        .set({
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'User-Agent': this.userAgent,
-          Authorization: authorization,
-          'Accept-Encoding': 'gzip',
-        });
-      return {
-        status: result.status,
-        ...result.body,
+      const headers = {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'User-Agent': this.userAgent,
+        Authorization: authorization,
+        'Accept-Encoding': 'gzip',
       };
+  
+      const response: AxiosResponse = await axios.post(url, params, { headers });
+      const result = {
+        status: response.status,
+        ...response.data,
+      };
+      return result;
     } catch (error) {
-      console.error("postRequest Error",error);
       const err = JSON.parse(JSON.stringify(error));
-      return {
-        status: err.status,
+      const result = {
+        status: err.response?.status,
         errRaw: err,
-        ...(err?.response?.text && JSON.parse(err?.response?.text)),
+        ...(err.response?.data && JSON.parse(err.response.data)),
       };
+      return result;
     }
   }
   /**

@@ -62,7 +62,7 @@ class Pay extends Base {
   public constructor(arg1: Ipay | string, mchid?: string, publicKey?: Buffer, privateKey?: Buffer, optipns?: Ioptions) {
     super();
 
-    if (arg1 instanceof Object) {
+  if (typeof arg1 === 'object' && arg1 !== null) {
       this.appid = arg1.appid;
       this.mchid = arg1.mchid;
       if (arg1.serial_no) this.serial_no = arg1.serial_no;
